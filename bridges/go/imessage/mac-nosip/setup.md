@@ -9,6 +9,7 @@ to self-host the bridge. If you're just looking to use the bridges, check out
 ### Compilation (optional)
 * Go 1.14+ (download & installation instructions at <https://golang.org/dl/>)
 * libolm3 with dev headers (`brew install libolm`)
+* xcpretty for barcelona (`brew install ruby` followed by `gem install xcpretty`)
 
 ### Runtime
 * A computer running a reasonably new version of macOS.
@@ -57,8 +58,9 @@ from the mau.dev CI.
    your synapse `homeserver.yaml` under `app_service_config_files`. You will
    then need to restart the synapse server. Remember to restart it every time
    the registration file is regenerated.
-7. Boot into recovery and open terminal and run `csrutil disable`
-8. Open the config.plist (in EFI/OC/config.plist) and change the Key boot-args to add  `amfi_get_out_of_my_way=0x1` example:
+7. Boot into recovery and open terminal and run `csrutil disable` and 
+   * run `nvram boot-args="amfi_get_out_of_my_way=0x1"`
+   * *If* you are running MacOS in a VM (e.g. through OSX-KVM https://github.com/kholia/OSX-KVM) you may need to disable AMFI with a boot option. Assuming you are using OSX-KVM and OpenCore, open the config.plist (in EFI/OC/config.plist) and change the Key boot-args to add  `amfi_get_out_of_my_way=0x1` example:
 ```
 <key>boot-args</key>
      <string>-v keepsyms=1 tlbto_us=0 vti=9 amfi_get_out_of_my_way=0x1</string>
