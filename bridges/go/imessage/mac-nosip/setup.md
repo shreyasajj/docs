@@ -59,14 +59,23 @@ from the mau.dev CI.
    the registration file is regenerated.
 7. Boot into recovery and open terminal and run `csrutil disable` and 
    * run `nvram boot-args="amfi_get_out_of_my_way=0x1"`
-   * *If* you are running MacOS in a VM (e.g. through OSX-KVM https://github.com/kholia/OSX-KVM) you may need to disable AMFI with a boot option. Assuming you are using OSX-KVM and OpenCore, open the config.plist (in EFI/OC/config.plist) and change the Key boot-args to add  `amfi_get_out_of_my_way=0x1` example:
+   * *If* you are running MacOS in a VM (e.g. through [OSX-KVM](https://github.com/kholia/OSX-KVM) you may need to disable AMFI with a boot option. Assuming you are using OSX-KVM and OpenCore, open the config.plist (in EFI/OC/config.plist) and change the Key boot-args to add  `amfi_get_out_of_my_way=0x1` example:
 ```
 <key>boot-args</key>
      <string>-v keepsyms=1 tlbto_us=0 vti=9 amfi_get_out_of_my_way=0x1</string>
 ```
 9. Install [com.apple.security.xpc.plist](https://github.com/open-imcore/barcelona/blob/mautrix/com.apple.security.xpc.plist) to `/Library/Preferences/com.apple.security.xpc.plist`
-10. get the barcelona exec from [https://jank.crap.studio/job/barcelona/job/mautrix/](https://jank.crap.studio/job/barcelona/job/mautrix/), get `darwin-barcelona-mautrix`	and download it to your computer
-11. Change `imessage_rest_path` to barcelona exec path from previous step
+10. get the barcelona exec:
+    * for a precompiled build, download from [https://jank.crap.studio/job/barcelona/job/mautrix/](https://jank.crap.studio/job/barcelona/job/mautrix/), get `darwin-barcelona-mautrix`	and download it to your computer
+    * to build your own binary from source, download the latest from [https://github.com/open-imcore/barcelona](https://github.com/open-imcore/barcelona), as follows:
+      * install ruby (`brew install ruby`)
+      * install xcpretty (`gem install xcpretty`)
+      * pull down the latest source code `git clone https://github.com/open-imcore/barcelona` (or `git pull` if you already have a local copy)
+      * make clean
+      * xcodegen generate
+      * make mautrix-macos
+      * binary should be available in `./Build/macOS/Build/Products/Debug/barcelona-mautrix`
+12. Change `imessage_rest_path` to barcelona exec path from previous step
     example `imessage_rest_path = /Users/user/Documents/Project/Imessage/darwin-barcelona-mautrix`
 12. Change `platform: mac` to `platform: mac-nosip`
 13. Run the bridge with `./mautrix-imessage`.
