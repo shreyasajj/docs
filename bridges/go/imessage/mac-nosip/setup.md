@@ -60,7 +60,7 @@ from the mau.dev CI.
    the registration file is regenerated.
 7. Boot into recovery and open terminal and run `csrutil disable` and 
    * run `nvram boot-args="amfi_get_out_of_my_way=0x1"`
-   * *If* you are running MacOS in a VM (e.g. through OSX-KVM https://github.com/kholia/OSX-KVM) you may need to disable AMFI with a boot option. Assuming you are using OSX-KVM and OpenCore, open the config.plist (in EFI/OC/config.plist) and change the Key boot-args to add  `amfi_get_out_of_my_way=0x1` example:
+   * *If* you are running MacOS in a VM e.g. through [OSX-KVM](https://github.com/kholia/OSX-KVM) you may need to disable AMFI with a boot option for the setting to stick. Assuming you are using OSX-KVM and OpenCore, open the config.plist (in EFI/OC/config.plist, typically in `OpenCore.qcow2`, see [OpenCore](https://dortania.github.io/OpenCore-Install-Guide/config.plist/#creating-your-config-plist) for more info) and change the Key boot-args to add  `amfi_get_out_of_my_way=0x1` example:
 ```
 <key>boot-args</key>
      <string>-v keepsyms=1 tlbto_us=0 vti=9 amfi_get_out_of_my_way=0x1</string>
